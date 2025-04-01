@@ -1,8 +1,8 @@
 import express from "express";
 import { Book } from "./models/bookModel.js";
-import  booksRoute  from "./routes/booksRoute.js";
-import cors from 'cors';
-import dotenv from 'dotenv'
+import booksRoute from "./routes/booksRoute.js";
+import cors from "cors";
+import dotenv from "dotenv";
 import path from "path";
 import { connectDB } from "./config/db.js";
 
@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 
-const port = process.env.PORT || 5555
+const port = process.env.PORT || 5555;
 
 const __dirname = path.resolve();
 
@@ -37,18 +37,17 @@ app.use(cors());
 //     return res.status(234).send("Welcome to MERN stack course")
 // })
 
-app.use("/books", booksRoute);
+app.use("/api/books", booksRoute);
 
 // deployment process
-if(process.env.NODE_ENV === "production"){
+if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "/frontend/dist")));
     app.get("*", (req, res) => {
         res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-    })
+    });
 }
 
-
-app.listen(port, ()=>{
+app.listen(port, () => {
     connectDB();
     console.log(`Server started at http://localhost:${port}`);
 });
