@@ -37,7 +37,7 @@ app.use(cors());
 //     return res.status(234).send("Welcome to MERN stack course")
 // })
 
-app.use("/api/books", booksRoute);
+app.use("/books", booksRoute);
 
 // deployment process
 if (process.env.NODE_ENV === "production") {
